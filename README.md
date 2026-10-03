@@ -1,387 +1,104 @@
-#  Email Spam Classification Using NLP and Machine Learning
+# Email Spam Classification — NLP, ML & LSTM
 
-## 🎓Predictive Analytics Course Project
+An end-to-end NLP project for classifying email text as **spam** or **ham (legitimate)** using classical machine-learning and deep-learning approaches.
 
-This project presents an intelligent **Email Spam Detection System** developed using **Natural Language Processing (NLP)** and **Machine Learning** techniques. The system classifies emails into **Spam** or **Ham (Not Spam)** categories by analyzing textual email content.
+## What this project demonstrates
 
-The project demonstrates the complete **Data Science Life Cycle**, including data collection, preprocessing, exploratory data analysis, feature engineering, model building, evaluation, and deployment using Streamlit.
+- Email-text preprocessing
+- TF-IDF feature engineering
+- Naive Bayes and Support Vector Machine baselines
+- Bidirectional LSTM sequence modelling
+- Model comparison and evaluation
+- Saved model artefacts for inference
+- Streamlit deployment
 
----
+## Dataset
 
-#  Team Members
+The project uses public email corpora including the **SpamAssassin Public Corpus** and **Enron email data**.
 
-| Team Member | Contribution |
-|-------------|--------------|
-| Krishnanjana J J | Data Collection, Preprocessing & EDA |
-| Nakshathra V | Feature Engineering & Model Training |
-| Harikrishnan S M | Deployment & Documentation |
+Raw text is cleaned and converted into model-ready representations while preserving the binary spam/ham target.
 
+## Workflow
 
-
----
-
-# 📌Problem Statement
-
-Email spam has become one of the major challenges in digital communication. Spam emails may contain advertisements, phishing links, scams, malware, or harmful content.
-
-The goal of this project is to build an automated spam email classifier using NLP and Machine Learning techniques that can accurately classify emails as spam or legitimate.
-
----
-
-# Objectives
-
-- Perform preprocessing on raw email text data
-- Apply NLP techniques for text cleaning
-- Extract meaningful features using TF-IDF and Word Embeddings
-- Train multiple machine learning and deep learning models
-- Compare model performance using evaluation metrics
-- Deploy the trained model using Streamlit
-- Build a complete end-to-end machine learning pipeline
-
----
-
-# Dataset Description
-
-This project uses the **SpamAssassin Public Corpus** and **Enron Email Dataset** for spam classification.
-
-## 📊 Dataset Features
-
-| Feature | Description |
-|----------|-------------|
-| Email Text | Content of the email |
-| Label | Spam or Ham |
-
-## 📈 Dataset Characteristics
-
-- Real-world email messages
-- Combination of spam and non-spam emails
-- Noisy and unstructured text data
-- Suitable for NLP-based classification tasks
-
----
-
-# 🔄 Data Science Life Cycle
-
-## 1️⃣ Problem Understanding
-
-The primary objective is to identify whether an email is spam or legitimate using machine learning models trained on textual data.
-
----
-
-## 2️⃣ Data Collection
-
-Datasets were collected from publicly available sources such as:
-
-- SpamAssassin Dataset
-- Enron Email Dataset
-
----
-
-## 3️⃣ Data Preprocessing
-
-Raw email text cannot be directly used for machine learning. Therefore, preprocessing techniques were applied.
-
-### 🔹 Preprocessing Steps
-
-- Lowercasing
-- Removing punctuation
-- Removing special characters
-- Tokenization
-- Stop-word removal
-- Lemmatization
-
-### Example
-
-```python
-"FREE OFFER!!!" → "free offer"
+```text
+Raw email text
+      ↓
+Cleaning and preprocessing
+      ↓
+ ┌────────────────────┬─────────────────────┐
+ │ TF-IDF             │ Token sequences     │
+ │                    │                     │
+ │ Naive Bayes / SVM  │ Bidirectional LSTM  │
+ └────────────────────┴─────────────────────┘
+      ↓
+Held-out evaluation
+      ↓
+Streamlit inference app
 ```
 
----
+## Models
 
-## 4️⃣ Exploratory Data Analysis (EDA)
+### Naive Bayes
+A lightweight probabilistic baseline trained on TF-IDF features.
 
-EDA was performed to understand patterns within the dataset.
+### Support Vector Machine
+A linear text classifier trained on sparse TF-IDF features.
 
-### 📊 Analysis Performed
+### Bidirectional LSTM
+A neural sequence model using tokenized and padded email text.
 
-- Spam vs Ham distribution
-- Most frequent spam words
-- Email length analysis
-- Word frequency visualization
-- Class imbalance analysis
+## Evaluation
 
-### 📷 Visualizations Used
+The notebooks evaluate the models using:
 
-- Bar Charts
-- Pie Charts
-- Histograms
-- Word Clouds
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion matrix
 
+For portfolio and resume use, model metrics should be quoted only from a reproducible held-out evaluation run. The repository therefore focuses on the pipeline and implementation rather than treating previously reported coursework numbers as universal benchmark results.
 
----
+## Repository Structure
 
-## 5️⃣ Feature Engineering
-
-Text data was converted into numerical representations for machine learning.
-
-### 🔹 TF-IDF Vectorization
-
-TF-IDF (Term Frequency–Inverse Document Frequency) measures the importance of words in a document.
-
-### Advantages
-
-- Efficient for text classification
-- Reduces impact of common words
-- Lightweight and fast
-
----
-
-### 🔹 Word Embeddings
-
-Word embeddings capture semantic meaning and contextual relationships between words.
-
-### Advantages
-
-- Better contextual understanding
-- Dense vector representation
-- Useful for deep learning models
-
----
-
-## 6️⃣ Model Building
-
-The following models were implemented and trained:
-
-| Model | Description |
-|------|------|
-| Naive Bayes | Probabilistic text classifier |
-| Support Vector Machine (SVM) | Supervised learning classifier |
-| LSTM | Deep learning sequential model |
-
----
-
-### 🔹 Naive Bayes
-
-Naive Bayes is commonly used for text classification because of its efficiency and simplicity.
-
-### 🔹 Support Vector Machine (SVM)
-
-SVM performs well on high-dimensional text datasets and provides strong classification accuracy.
-
-### 🔹 Long Short-Term Memory (LSTM)
-
-LSTM is a deep learning model capable of understanding sequential text patterns and context.
-
----
-
-## 7️⃣ Model Evaluation
-
-Models were evaluated using multiple performance metrics.
-
-### 📊 Evaluation Metrics
-
-| Metric | Description |
-|--------|-------------|
-| Accuracy | Overall correctness |
-| Precision | Correct spam predictions |
-| Recall | Ability to detect spam |
-| F1-Score | Balance between precision and recall |
-| Confusion Matrix | Visual performance representation |
-
----
-
-# 📈 Model Performance Comparison
-
-| Model | Accuracy | Precision | Recall | F1-Score |
-|------|------|------|------|------|
-| Naive Bayes | 96% | 95% | 94% | 0.95 |
-| SVM | 98% | 97% | 97% | 0.97 |
-| LSTM | 99% | 98% | 98% | 0.98 |
-
----
-
-#  Best Performing Model
-
-The **LSTM model** achieved the highest performance because it effectively captures contextual relationships within email text data.
-
----
-
-# 📊 Confusion Matrix
-
-The confusion matrix helps visualize:
-
-- True Positives
-- True Negatives
-- False Positives
-- False Negatives
-
-
-
----
-
-# 🧠 Technologies Used
-
-| Technology | Purpose |
-|------------|---------|
-| Python | Programming Language |
-| Pandas | Data Analysis |
-| NumPy | Numerical Operations |
-| Scikit-learn | Machine Learning |
-| TensorFlow / Keras | Deep Learning |
-| NLTK | Natural Language Processing |
-| Matplotlib | Data Visualization |
-| Streamlit | Web Deployment |
-
----
-
-# 📁 Project Structure
-
-```bash
+```text
 Predictive_Analytics_Project-3/
-│
-├── .devcontainer/
-├── preprocessing_output/
-├── trained_models/
-│
-├── Email_spam_classification.ipynb
-├── Preprocess.ipynb
-├── feature_extraction.py
-├── model_training.py
 ├── app.py
+├── feature_extraction.py
+├── Preprocess.ipynb
+├── model_training_py.ipynb
+├── Email_spam_classification_(1) (1).ipynb
+├── trained_models/
+├── screenshots/
 ├── requirements.txt
-├── README.md
-│
-└── screenshots/
-    ├── github_repo.png
-    ├── streamlit_app.png
-    
+└── README.md
 ```
 
----
-
-# 🚀 Streamlit Deployment
-
-The trained model is deployed using **Streamlit Community Cloud**.
-
-## 🌐 Features of the Web Application
-
-✅ User-friendly interface  
-✅ Real-time spam prediction  
-✅ Email text input support  
-✅ Instant prediction results  
-✅ Handles invalid inputs gracefully  
-
----
-
-# ▶️ Running the Application
-
-## Step 1: Clone the Repository
+## Run the App
 
 ```bash
-git clone https://github.com/your-username/Predictive_Analytics_Project-3.git
-```
-
----
-
-## Step 2: Navigate to Project Directory
-
-```bash
+git clone https://github.com/nakshathravds25-ux/Predictive_Analytics_Project-3.git
 cd Predictive_Analytics_Project-3
-```
-
----
-
-## Step 3: Install Dependencies
-
-```bash
 pip install -r requirements.txt
-```
-
----
-
-## Step 4: Run the Streamlit App
-
-```bash
 streamlit run app.py
 ```
 
----
+## Live Demo
 
-# 🌐 Live Deployment Link
+https://email-spam-detection-i3plduappn4kgf8p6rwfzzn.streamlit.app/
 
-👉 https://email-spam-detection-i3plduappn4kgf8p6rwfzzn.streamlit.app/
-Example:
+## Team Contribution
 
-```bash
-https://email-spam-classifier.streamlit.app/
-```
+This was a team course project.
 
----
+- **Nakshathra V:** feature engineering and model training
+- Krishnanjana J J: data collection, preprocessing and EDA
+- Harikrishnan S M: deployment and documentation
 
----
+## Tech Stack
 
-# 🔍 Challenges Faced
+Python · Pandas · NumPy · scikit-learn · TensorFlow/Keras · NLTK · Streamlit
 
-During the development of this project, several challenges were encountered:
+## Limitations & Future Work
 
-- Handling noisy email text
-- Managing class imbalance
-- Feature dimensionality issues
-- Improving model performance
-- Deployment compatibility issues
-
----
-
-# 🔮 Future Enhancements
-
-Possible future improvements include:
-
-- Real-time email integration
-- Multi-language spam detection
-- Transformer-based models like BERT
-- Explainable AI integration
-- Cloud-based scalable deployment
-
----
-
-# 📚 Conclusion
-
-This project successfully demonstrates the application of NLP and machine learning techniques for spam email classification. Multiple machine learning and deep learning models were implemented and evaluated. Among all models, the LSTM model achieved the best performance with high accuracy and F1-score.
-
-The deployed Streamlit application provides an efficient and practical solution for real-time spam detection.
-
----
-
-# 📎 Submission Requirements Included
-
-✅ Source Code  
-✅ Jupyter Notebooks  
-✅ Streamlit Deployment  
-✅ README Documentation  
-✅ PPT Presentation  
-✅ GitHub Contribution Screenshots  
-✅ requirements.txt  
-✅ Individual Contribution Profiles  
-
----
-
-# 📄 References
-
-1. Scikit-learn Documentation  
-2. TensorFlow Documentation  
-3. NLTK Documentation  
-4. Streamlit Documentation  
-5. SpamAssassin Public Corpus  
-6. Enron Email Dataset  
-
----
-
-# 📜 License
-
-This project is developed for academic and educational purposes only.
-
----
-
-
-
-
+Potential improvements include stronger duplicate/leakage checks across source corpora, threshold tuning, calibration, transformer baselines, explainability, and testing on temporally newer spam distributions.
